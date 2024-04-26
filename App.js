@@ -27,7 +27,7 @@ export default function App(){
     // save to do
     const newToDos = {
       ...toDos,
-      [Date.now()] : {text, work: working},
+      [Date.now()] : {text, working},
     };
     setToDos(newToDos);
     setText("");
@@ -64,9 +64,11 @@ export default function App(){
       </View>
       <ScrollView>{
         Object.keys(toDos).map((key) => (
-          <View style={styles.toDo} key={key}>
-            <Text style={styles.toDoText}>{toDos[key].text}</Text>
-          </View>
+          toDos[key].working === working ? (
+            <View style={styles.toDo} key={key}>
+              <Text style={styles.toDoText}>{toDos[key].text}</Text>
+            </View> 
+          ) : null
         ))}
       </ScrollView>
     </View>
