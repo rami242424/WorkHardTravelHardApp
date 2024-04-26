@@ -10,6 +10,7 @@ import {
   Pressable,
   TextInput,
   ScrollView,
+  Platform
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Fontisto } from "@expo/vector-icons";
@@ -34,7 +35,10 @@ export default function App(){
    const s = await AsyncStorage.getItem(STORAGE_KEY);
   //  console.log(s);
   // console.log(s, JSON.parse(s));
-  setToDos(JSON.parse(s));
+  if(s){
+
+    setToDos(JSON.parse(s));
+  }
 
   }
   
@@ -53,18 +57,28 @@ export default function App(){
   }
   // console.log(toDos);
   const deleteToDo = async (key) => {
-    Alert.alert(
-      "Delete To Do?", 
-      "Are you sure?", [
-      {text: "Cancel"},
-      {text: "I'm sure", onPress: () => {
+    if(Platform.OS === "web"){
+      const ok = confirm("Do you want to delete this To Do?")
+      if(ok) {
         const newToDos = {...toDos}
-        delete newToDos[key] 
-        setToDos(newToDos);
-        saveToDos(newToDos);
+            delete newToDos[key] 
+            setToDos(newToDos);
+            saveToDos(newToDos);
       }
-      },
-    ]);
+    } else{
+      Alert.alert(
+        "Delete To Do?", 
+        "Are you sure?", [
+          {text: "Cancel"},
+          {text: "I'm sure", onPress: () => {
+            const newToDos = {...toDos}
+            delete newToDos[key] 
+            setToDos(newToDos);
+            saveToDos(newToDos);
+          }
+        },
+      ]);
+    }
     return;
   }
   return (
@@ -73,14 +87,20 @@ export default function App(){
       <View style={styles.header}>
         <TouchableOpacity onPress={work}>
           <Text 
-            style={{...styles.btnText, color: working ? "white" : theme.gray}}
+            style={{
+              ...styles.btnText,
+              color: working ? "white" : theme.gray
+            }}
           >
             Work
           </Text> 
         </TouchableOpacity>
         <TouchableOpacity onPress={travel}>
           <Text 
-            style={{...styles.btnText, color: !working ? "white" : theme.gray}}
+            style={{ 
+              ...styles.btnText,
+              color: !working ? "white" : theme.gray
+            }}
           >
             Travel
           </Text>
@@ -140,7 +160,7 @@ const styles = StyleSheet.create ({
   },  
 
   btnText: {
-    fontSize: 38 ,
+    fontSize: 38,
     fontWeight: "600",
   },
 
