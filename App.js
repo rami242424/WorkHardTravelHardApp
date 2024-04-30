@@ -23,7 +23,8 @@ export default function App() {
         </TouchableOpacity>
 
         <Pressable 
-          onPress={() => console.log("pressed")}
+          onPress={() => console.log("50")}
+          hitSlop={50}
         >
           <Text style={styles.btnText}>Travel</Text>
         </Pressable>
