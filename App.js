@@ -12,6 +12,7 @@ import {
   TextInput,
   ScrollView,
   Alert,
+  Platform,
 
 } from "react-native";
 import { theme } from "./colors";
@@ -56,6 +57,17 @@ export default function App() {
     setText("");
   }
   const deleteToDo = async(key) => {
+    // 웹일떄
+    if(Platform.OS === "web"){
+      const ok = confirm("Do you want to delete this To Do?");
+      if(ok!== null && ok === true){
+        const newToDos = {...toDos}
+        delete newToDos[key];
+        setToDos(newToDos);
+        await saveToDos(newToDos);
+      }
+    } else {
+    // 모바일일떄
     Alert.alert(
       "Delete To Do", 
       "Are you sure?", [
@@ -67,6 +79,7 @@ export default function App() {
         await saveToDos(newToDos);
       }},
     ]);
+  }
     return
   }
 
