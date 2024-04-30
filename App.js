@@ -15,6 +15,7 @@ import {
 import { theme } from "./colors";
 
 export default function App() {
+  const [toDos, setToDos] = useState({});
   const [text, setText] = useState("");
   const [working, setWorking] = useState(true);
   const travel = () => setWorking(false);
@@ -22,6 +23,18 @@ export default function App() {
   // const onChangeText = (event) => console.log(event);
   const onChangeText = (payload) => setText(payload);
   // console.log(text);
+  const addToDo = () => {
+    if(text === ""){
+      return
+    }
+    // alert(text);
+    // save to do
+    const newToDos = Object.assign({}, toDos, {
+      [Date.now()] : { text, work : working },
+    });
+    setToDos(newToDos);
+    setText("");
+  }
 
   return (
     <View style={styles.container}>
@@ -35,7 +48,8 @@ export default function App() {
         </TouchableOpacity>
       </View>
         <TextInput
-          
+          returnKeyType="done"
+          onSubmitEditing={addToDo}
           value={text}
           onChangeText={onChangeText}
           placeholderTextColor="#747474"
