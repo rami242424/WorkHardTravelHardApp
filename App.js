@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
   TouchableHighlight,
+  TouchableWithoutFeedback,
 
 } from "react-native";
 import { theme } from "./colors";
@@ -20,13 +21,11 @@ export default function App() {
           <Text style={styles.btnText}>Work</Text>
         </TouchableOpacity>
 
-        <TouchableHighlight 
+        <TouchableWithoutFeedback 
           onPress={() => console.log("pressed")}
-          underlayColor="red"
-          activeOpacity={0.5}
         >
           <Text style={styles.btnText}>Travel</Text>
-        </TouchableHighlight>
+        </TouchableWithoutFeedback>
       </View>
     </View>
   );
