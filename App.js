@@ -15,10 +15,13 @@ import {
 import { theme } from "./colors";
 
 export default function App() {
+  const [text, setText] = useState("");
   const [working, setWorking] = useState(true);
   const travel = () => setWorking(false);
   const work = () => setWorking(true);
-  const onChangeText = (event) => console.log(event);
+  // const onChangeText = (event) => console.log(event);
+  const onChangeText = (payload) => setText(payload);
+  // console.log(text);
 
   return (
     <View style={styles.container}>
@@ -31,8 +34,10 @@ export default function App() {
           <Text style={{...styles.btnText, color: !working ? "white" : theme.gray }}>Travel</Text>
         </TouchableOpacity>
       </View>
-        <TextInput 
-          autoCapitalize={"characters"}
+        <TextInput
+          
+          value={text}
+          onChangeText={onChangeText}
           placeholderTextColor="#747474"
           placeholder={
             working ? "Add what you have to do.." : "Add where do you want to go"
