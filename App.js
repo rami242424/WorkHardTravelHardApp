@@ -15,10 +15,18 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <View style={styles.header}> 
+
         <TouchableOpacity activeOpacity={0.5}>
           <Text style={styles.btnText}>Work</Text>
         </TouchableOpacity>
+
+        <TouchableHighlight 
+          onPress={() => console.log("pressed")}
+          underlayColor="red"
+          activeOpacity={0.5}
+        >
           <Text style={styles.btnText}>Travel</Text>
+        </TouchableHighlight>
       </View>
     </View>
   );
