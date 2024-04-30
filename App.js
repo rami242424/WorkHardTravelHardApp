@@ -21,6 +21,9 @@ export default function App() {
   const [toDos, setToDos] = useState({});
   const [text, setText] = useState("");
   const [working, setWorking] = useState(true);
+  useEffect(() => {
+    loadToDos();
+  }, [])
   const travel = () => setWorking(false);
   const work = () => setWorking(true);
   // const onChangeText = (event) => console.log(event);
@@ -32,12 +35,10 @@ export default function App() {
 
   const loadToDos = async() => {
     const s = await AsyncStorage.getItem(STORAGE_KEY)
-    console.log(s);
+    // console.log(s, JSON.parse(s));
+    setToDos(JSON.parse(s))
   }
-  useEffect(() => {
-    loadToDos();
-  }, [])
-
+  
   const addToDo = async() => {
     if(text === ""){
       return
