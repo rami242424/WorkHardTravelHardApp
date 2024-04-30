@@ -18,6 +18,7 @@ export default function App() {
   const [working, setWorking] = useState(true);
   const travel = () => setWorking(false);
   const work = () => setWorking(true);
+  const onChangeText = (event) => console.log(event);
 
   return (
     <View style={styles.container}>
@@ -31,7 +32,8 @@ export default function App() {
         </TouchableOpacity>
       </View>
         <TextInput 
-          returnKeyType="previous"
+          onChangeText={onChangeText}
+          placeholderTextColor="#747474"
           placeholder={
             working ? "Add what you have to do.." : "Add where do you want to go"
           } 
