@@ -5,6 +5,8 @@ import {
   Text, 
   View,
   TouchableOpacity,
+  TouchableHighlight,
+
 } from "react-native";
 import { theme } from "./colors";
 
@@ -13,7 +15,7 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <View style={styles.header}> 
-        <TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.5}>
           <Text style={styles.btnText}>Work</Text>
         </TouchableOpacity>
           <Text style={styles.btnText}>Travel</Text>
