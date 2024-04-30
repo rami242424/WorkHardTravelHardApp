@@ -1,3 +1,4 @@
+import { Fontisto } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import { 
@@ -97,7 +98,7 @@ export default function App() {
               <View style={styles.toDo} key={key}>
                 <Text style={styles.toDoText}>{toDos[key].text}</Text>
                 <TouchableOpacity onPress={() => deleteToDo(key)}>
-                  <Text>@</Text>
+                  <Text><Fontisto name="trash" size={17} color="white" /></Text>
                 </TouchableOpacity>
               </View>
             ) : null)
@@ -149,7 +150,7 @@ const styles = StyleSheet.create({
 
   toDoText: {
     color: "white",
-    fontSize: 15,
+    fontSize: 17,
     fontWeight: "500",
   },
 });
