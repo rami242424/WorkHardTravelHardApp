@@ -32,7 +32,7 @@ export default function App() {
         </TouchableOpacity>
       </View>
         <TextInput 
-          onChangeText={onChangeText}
+          autoCapitalize={"characters"}
           placeholderTextColor="#747474"
           placeholder={
             working ? "Add what you have to do.." : "Add where do you want to go"
