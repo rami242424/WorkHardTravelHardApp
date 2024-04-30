@@ -10,6 +10,7 @@ import {
   Pressable,
   TextInput,
   ScrollView,
+  Alert,
 
 } from "react-native";
 import { theme } from "./colors";
@@ -53,6 +54,20 @@ export default function App() {
     await saveToDos(newToDos);
     setText("");
   }
+  const deleteToDo = async(key) => {
+    Alert.alert(
+      "Delete To Do", 
+      "Are you sure?", [
+      {text: "Cancel"},
+      {text: "I'm sure", onPress: async () => {
+        const newToDos = {...toDos}
+        delete newToDos[key];
+        setToDos(newToDos);
+        await saveToDos(newToDos);
+      }},
+    ]);
+    return
+  }
 
   return (
     <View style={styles.container}>
@@ -81,9 +96,11 @@ export default function App() {
             toDos[key].working === working ? (
               <View style={styles.toDo} key={key}>
                 <Text style={styles.toDoText}>{toDos[key].text}</Text>
+                <TouchableOpacity onPress={() => deleteToDo(key)}>
+                  <Text>@</Text>
+                </TouchableOpacity>
               </View>
-            ) : null
-            )
+            ) : null)
           )}
         </ScrollView>
     </View>
@@ -125,6 +142,9 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 
   toDoText: {
